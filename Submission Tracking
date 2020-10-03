@@ -1,0 +1,104 @@
+jsalisbury_1 = ['lot_area', 'land_cont', 'neighborhood', 'cond_1', 'bldg_type', 'style', 'overall_cond', 'yr_built', 'yr_remodeled', 'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 'has_pool', 'year_sold']
+jsalisbury_2 =
+jsalisbury_3 =
+jsalisbury_4 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 'yr_built', 'exter_cond', 'bsmt_sf', 'full_bath', 'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 'fe_ov_cond_gr_liv_area']
+jsalisbury_5 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 'overall_cond', 'exter_cond', 'bsmt_sf', 'full_bath', 'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 'fe_yr_blt_gr_liv_area']
+jsalisbury_6 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 'style', 'overall_cond', 'yr_built', 'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 'year_sold', 'cent_air']
+jsalisbury_7 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 'style', 'overall_cond', 'yr_built', 'yr_remodeled', 'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 'year_sold', 'cent_air']
+jsalisbury_8 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 'style', 'overall_cond', 'yr_built', 'yr_remodeled', 'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 'cent_air']
+jsalisbury_9 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 'style', 'overall_cond', 'yr_built', 'yr_remodeled', 'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 'cent_air','fe_bed_full_bath']
+jsalisbury_10 = ['lot_area', 
+         'neighborhood', 
+         'cond_1', 
+         'bldg_type', 
+         'style', 
+         'overall_cond', 
+         'yr_built', 
+         'yr_remodeled', 
+         'exter_cond', 
+         'bsmt_fin_1',
+         'bsmt_sf', 
+         'gr_liv_area', 
+         'half_bath', 
+         'kitch_qual', 
+         'garage_type', 
+         'cent_air',
+        ]
+jsalisbury_11 = ['lot_area', 
+         'land_cont',
+         'neighborhood', 
+         'cond_1', 
+         'bldg_type', 
+         'style', 
+         'overall_cond', 
+         'yr_built', 
+         'yr_remodeled', 
+         'exter_cond', 
+         'bsmt_fin_1',
+         'bsmt_fin_2',
+         'bsmt_sf', 
+         'gr_liv_area', 
+         'half_bath', 
+         'kitch_qual', 
+         'garage_type',
+         'garage_car_size',
+         'cent_air',
+        ]
+jsalisbury_12 = ['lot_area', 
+         'land_cont',
+         'neighborhood', 
+         'cond_1', 
+         'bldg_type', 
+         'style', 
+         'overall_cond', 
+         'yr_built', 
+         'yr_remodeled', 
+         'exter_cond', 
+         'bsmt_fin_1',
+         'bsmt_fin_2',
+         'bsmt_sf', 
+         'gr_liv_area', 
+         'half_bath', 
+         'kitch_qual', 
+         'garage_type',
+         'garage_car_size',
+         'cent_air',
+         'gr_liv_area_sq'
+        ]
+jsalisbury_13 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 'style', 
+       'overall_cond', 'yr_built', 'yr_remodeled', 'exter_cond', 
+       'bsmt_sf', 'gr_liv_area', 'full_bath', 'half_bath', 
+       'bedrooms_gr', 'kitch_qual', 'garage_type', 'cent_air',
+       'fe_bed_full_bath', 'gr_liv_area_sq']
+jsalisbury_14 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 'style', 
+       'overall_cond', 'yr_built', 'yr_remodeled', 'exter_cond', 
+       'bsmt_sf', 'gr_liv_area', 'full_bath', 'half_bath', 
+       'bedrooms_gr', 'kitch_qual', 'garage_type', 'cent_air',
+       'fe_bed_full_half_bath', 'gr_liv_area_sq']
+jsalisbury_15 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 
+                'style', 'overall_cond', 'yr_built', 'yr_remodeled', 
+                'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 
+                'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 
+                'cent_air','fe_bed_full_bath', 'bsmt_fin_1', 'bsmt_fin_2']
+jsalisbury_16 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 
+                'style', 'overall_cond', 'yr_built', 'yr_remodeled', 
+                'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 
+                'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 
+                'cent_air','fe_bed_full_bath', 'bsmt_fin_1']
+jsalisbury_17 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 
+                'style', 'overall_cond', 'yr_built', 'yr_remodeled', 
+                'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 
+                'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 
+                'cent_air','fe_bed_full_bath', 'bsmt_fin_1', 'tot_sf'] ---- tot_sf = bsmt_sf * gr_liv_area
+jsalisbury_18 = Garbage submission, tot_sf had one with 8 and one with +
+jsalisbury_19 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 
+                'style', 'overall_cond', 'yr_built', 'yr_remodeled', 
+                'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 
+                'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 
+                'cent_air','fe_bed_full_bath', 'bsmt_fin_1', 'tot_sf'] ---- tot_sf = bsmt_sf + gr_liv_area
+jsalisbury_20 = ['lot_area', 'neighborhood', 'cond_1', 'bldg_type', 
+                'style', 'overall_cond', 'yr_built', 'yr_remodeled', 
+                'exter_cond', 'bsmt_sf', 'gr_liv_area', 'full_bath', 
+                'half_bath', 'bedrooms_gr', 'kitch_qual', 'garage_type', 
+                'cent_air','fe_bed_full_bath', 'bsmt_fin_1'] ----- with logged target price
+
