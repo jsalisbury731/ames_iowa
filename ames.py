@@ -11,15 +11,21 @@ def rename(df):
                                      'Condition 2':'cond_2',
                                      'Bldg Type':'bldg_type',
                                      'House Style':'style',
+                                     'Overall Qual':'overall_qual',
                                      'Overall Cond':'overall_cond',
                                      'Year Built':'yr_built',
                                      'Year Remod/Add':'yr_remodeled',
                                      'Roof Style':'roof_style',
+                                     'Roof Matl':'roof_mater',
+                                     'Exterior 1st':'exter_1',
+                                     'Exter Qual':'exter_qual',
                                      'Exter Cond':'exter_cond',
                                      'Foundation':'foundation',
                                      'Bsmt Cond':'bsmt_cond',
                                      'BsmtFin Type 1':'bsmt_fin_1',
+                                     'BsmtFin SF 1':'bsmt_fin_1_sf',
                                      'BsmtFin Type 2':'bsmt_fin_2',
+                                     'BsmtFin SF 2':'bsmt_fin_2_sf',
                                      'Total Bsmt SF':'bsmt_sf',
                                      'Heating':'heat',
                                      'Central Air':'cent_air',
@@ -29,45 +35,57 @@ def rename(df):
                                      'Bedroom AbvGr':'bedrooms_gr',
                                      'Kitchen AbvGr':'kitchen',
                                      'Kitchen Qual':'kitch_qual',
+                                     'TotRms AbvGrd':'tot_rooms_gr',
                                      'Fireplaces':'fireplaces',
                                      'Garage Type':'garage_type',
                                      'Garage Cars':'garage_car_size',
+                                     'Garage Cond':'garage_cond',
                                      'Paved Drive':'paved_drive',
                                      'Pool QC':'pool_qual',
+                                     'Misc Val':'misc_val',
                                      'Yr Sold':'year_sold'
                                      })
     included_cols = ['Id',
                      'lot_area',
-                     'street',   # Secondary, removing from first model, value split of 2044 / 7
-                     'land_cont',   # Value split of 1843 / 85 / 80 / 43
+                     'street',          # Secondary, removing from first model, value split of 2044 / 7
+                     'land_cont',       # Value split of 1843 / 85 / 80 / 43
                      'neighborhood',
                      'cond_1',
-                     'cond_2',  # Secondary, removing from first model, value split of 2025 (Normal) / 26 (other values)
+                     'cond_2',          # Secondary, removing from first model, value split of 2025 (Normal) / 26 (other values)
                      'bldg_type',
                      'style',
-                     'overall_cond',   # Secondary variable to investigate
+                     'overall_qual',    # NEW feature as of 10/2/20
+                     'overall_cond',    # Secondary variable to investigate
                      'yr_built',
                      'yr_remodeled',
-                     'roof_style',   # Secondary variable to investigate
+                     'roof_style',      # Secondary variable to investigate
+                     'roof_mater',      # NEW feature as of 10/2/20
+                     'exter_1',         # NEW feature as of 10/2/20
+                     'exter_qual',      # NEW feature as of 10/2/20
                      'exter_cond',
-                     'foundation',   # Secondary variable to investigate
-                     'bsmt_cond',   # Secondary, removing from first model, 1834 (Typicals) / 92 (Good | Excellent) / 70 (Fair | Poor)
-                     'bsmt_fin_1',   # Secondary variable to investigate
-                     'bsmt_fin_2',   # Secondary variable to investigate
+                     'foundation',      # Secondary variable to investigate
+                     'bsmt_cond',       # Secondary, removing from first model, 1834 (Typicals) / 92 (Good | Excellent) / 70 (Fair | Poor)
+                     'bsmt_fin_1',      # Secondary variable to investigate
+                     'bsmt_fin_1_sf',   # NEW feature as of 10/2/20
+                     'bsmt_fin_2',      # Secondary variable to investigate
+                     'bsmt_fin_2_sf',   # NEW feature as of 10/2/20
                      'bsmt_sf',
-                     'heat',   # Secondary, removing from first model, value split of 2018 (GasA) / 33 (other values)
-                     'cent_air',   # Secondary variable to investigate
+                     'heat',            # Secondary, removing from first model, value split of 2018 (GasA) / 33 (other values)
+                     'cent_air',        # Secondary variable to investigate
                      'gr_liv_area',
                      'full_bath',
                      'half_bath',
                      'bedrooms_gr',
-                     'kitchen',   # Secondary variable to investigate
+                     'kitchen',         # Secondary variable to investigate
                      'kitch_qual',
-                     'fireplaces',   # Secondary variable to investigate
+                     'tot_rooms_gr',    # NEW feature as of 10/2/20
+                     'fireplaces',      # Secondary variable to investigate
                      'garage_type',
                      'garage_car_size',
-                     'paved_drive',   # Secondary, removing from first model, 1861 (Paved) / 39 (Partial) / 151 (Dirt/Gravel)
-                     'pool_qual',   # Consider removing from first model, only 9 houses with pools
+                     'garage_cond',     # NEW feature as of 10/2/20
+                     'paved_drive',     # Secondary, removing from first model, 1861 (Paved) / 39 (Partial) / 151 (Dirt/Gravel)
+                     'pool_qual',       # Consider removing from first model, only 9 houses with pools
+                     'misc_val',        # NEW feature as of 10/2/20
                      'year_sold'
                      ]
 
@@ -153,6 +171,18 @@ def map(df):
                                    '1.5Unf':'Unfin',
                                    '2.5Fin':'Fin'
                                   })
+    # Mapping overall_qual to combine three lowest values
+    df['overall_qual'] = df['overall_qual'].map({1:3,
+                                               2:3,
+                                               3:3,
+                                               4:4,
+                                               5:5,
+                                               6:6,
+                                               7:7,
+                                               8:8,
+                                               9:9,
+                                               10:10
+                                              })
 
     # Mapping overall_cond to combine three lowest values
     df['overall_cond'] = df['overall_cond'].map({1:3,
@@ -174,6 +204,33 @@ def map(df):
                                              'Mansard':'Other',
                                              'Shed':'Other'
                                             })
+
+    # Mapping roof material to combine smaller categories to Other
+    df['roof_mater'] = df['roof_mater'].map({'CompShg':'CompShg',
+                                             'Tar&Grv':'Tar&Grv',
+                                             'WdShngl':'Other',
+                                             'WdShake':'Other',
+                                             'Membran':'Other',
+                                             'ClyTile':'Other'
+                                            })
+
+    # Mapping exter_1 to combine smaller categories to Other
+    df['exter_1'] = df['exter_1'].map({'VinylSd':'VinylSd',
+                                       'MetalSd':'MetalSd',
+                                       'HdBoard':'HdBoard',
+                                       'Wd Sdng':'Wd Sdng',
+                                       'Plywood':'Plywood',
+                                       'CemntBd':'CemntBd',
+                                       'BrkFace':'BrkFace',
+                                       'WdShing':'WdShing',
+                                       'AsbShng':'AsbShng',
+                                       'Stucco':'Stucco',
+                                       'BrkComm':'Other',
+                                       'Stone':'Other',
+                                       'CBlock':'Other',
+                                       'AsphShn':'Other',
+                                       'ImStucc':'Other'
+                                      })
 
     # Mapping exter_cond to combine like categories
     df['exter_cond'] = df['exter_cond'].map({'TA':'TA',
@@ -232,6 +289,14 @@ def map(df):
                                                        4:3,
                                                        5:3
                                                       })
+
+    # Mapping exter_cond to combine like categories
+    df['garage_cond'] = df['garage_cond'].map({'TA':'TA',
+                                               'Gd':'Gd',
+                                               'Fa':'Fa',
+                                               'Ex':'Gd',
+                                               'Po':'Fa'
+                                              })
 
     # Mapping kitch_qual to combine like categories
     df['kitch_qual'] = df['kitch_qual'].map({'TA':'TA',
