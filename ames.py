@@ -43,7 +43,8 @@ def rename(df):
                                      'Paved Drive':'paved_drive',
                                      'Pool QC':'pool_qual',
                                      'Misc Val':'misc_val',
-                                     'Yr Sold':'year_sold'
+                                     'Yr Sold':'year_sold',
+                                     'MS SubClass':'ms_subclass'
                                      })
     included_cols = ['Id',
                      'lot_area',
@@ -86,7 +87,8 @@ def rename(df):
                      'paved_drive',     # Secondary, removing from first model, 1861 (Paved) / 39 (Partial) / 151 (Dirt/Gravel)
                      'pool_qual',       # Consider removing from first model, only 9 houses with pools
                      'misc_val',        # NEW feature as of 10/2/20
-                     'year_sold'
+                     'year_sold',
+                     'ms_subclass'
                      ]
 
     if 'SalePrice' not in df.columns:
@@ -323,5 +325,28 @@ def map(df):
     
     # Replace NaN values in bsmt_fin_2_sf with 0
     df["bsmt_fin_2_sf"].fillna(0, inplace = True)
-
+        
+    # Convert ms_subclass to object dtype
+    df['ms_subclass'] = df['ms_subclass'].astype(str)
+    
+    # Mapping ms_subclass to combine like categories
+    df['ms_subclass'] = df['ms_subclass'].map({'20':'20',
+                                               '30':'30',
+                                               '40':'50',
+                                               '45':'45',
+                                               '50':'50',
+                                               '60':'60',
+                                               '70':'70',
+                                               '75':'75',
+                                               '80':'80',
+                                               '85':'85',
+                                               '90':'90',
+                                               '120':'120',
+                                               '150':'180',
+                                               '160':'160',
+                                               '180':'180',
+                                               '190':'190'
+                                              })
+    
+   
     return df
