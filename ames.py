@@ -317,5 +317,11 @@ def map(df):
                                      'RRNn':'RRN',
                                      'RRNe':'RRN'
                                     })
+    
+    # Replace NaN values in bsmt_fin_1_sf with 0
+    df["bsmt_fin_1_sf"].fillna(0, inplace = True)
+    
+    # Replace NaN values in bsmt_fin_2_sf with 0
+    df["bsmt_fin_2_sf"].fillna(0, inplace = True)
 
     return df
