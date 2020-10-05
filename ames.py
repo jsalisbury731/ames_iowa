@@ -6,6 +6,7 @@ def rename(df):
                                      'Lot Area':'lot_area',
                                      'Street':'street',
                                      'Land Contour':'land_cont',
+                                     'Lot Config':'lot_config',
                                      'Neighborhood':'neighborhood',
                                      'Condition 1':'cond_1',
                                      'Condition 2':'cond_2',
@@ -18,10 +19,12 @@ def rename(df):
                                      'Roof Style':'roof_style',
                                      'Roof Matl':'roof_mater',
                                      'Exterior 1st':'exter_1',
+                                     'Mas Vnr Type':'mas_vnr_type',
                                      'Exter Qual':'exter_qual',
                                      'Exter Cond':'exter_cond',
                                      'Foundation':'foundation',
                                      'Bsmt Cond':'bsmt_cond',
+                                     'Bsmt Exposure':'bsmt_expo',
                                      'BsmtFin Type 1':'bsmt_fin_1',
                                      'BsmtFin SF 1':'bsmt_fin_1_sf',
                                      'BsmtFin Type 2':'bsmt_fin_2',
@@ -44,12 +47,14 @@ def rename(df):
                                      'Pool QC':'pool_qual',
                                      'Misc Val':'misc_val',
                                      'Yr Sold':'year_sold',
-                                     'MS SubClass':'ms_subclass'
+                                     'MS SubClass':'ms_subclass',
+                                     'Lot Shape':'lot_shape'
                                      })
     included_cols = ['Id',
                      'lot_area',
                      'street',          # Secondary, removing from first model, value split of 2044 / 7
                      'land_cont',       # Value split of 1843 / 85 / 80 / 43
+                     'lot_config',
                      'neighborhood',
                      'cond_1',
                      'cond_2',          # Secondary, removing from first model, value split of 2025 (Normal) / 26 (other values)
@@ -62,10 +67,12 @@ def rename(df):
                      'roof_style',      # Secondary variable to investigate
                      'roof_mater',      # NEW feature as of 10/2/20
                      'exter_1',         # NEW feature as of 10/2/20
+                     'mas_vnr_type',
                      'exter_qual',      # NEW feature as of 10/2/20
                      'exter_cond',
                      'foundation',      # Secondary variable to investigate
                      'bsmt_cond',       # Secondary, removing from first model, 1834 (Typicals) / 92 (Good | Excellent) / 70 (Fair | Poor)
+                     'bsmt_expo',
                      'bsmt_fin_1',      # Secondary variable to investigate
                      'bsmt_fin_1_sf',   # NEW feature as of 10/2/20
                      'bsmt_fin_2',      # Secondary variable to investigate
@@ -88,7 +95,8 @@ def rename(df):
                      'pool_qual',       # Consider removing from first model, only 9 houses with pools
                      'misc_val',        # NEW feature as of 10/2/20
                      'year_sold',
-                     'ms_subclass'
+                     'ms_subclass',
+                     'lot_shape'
                      ]
 
     if 'SalePrice' not in df.columns:
@@ -347,6 +355,19 @@ def map(df):
                                                '180':'180',
                                                '190':'190'
                                               })
+    
+    # Fill nulls and convert mas_vnr_type to object dtype
+    df["mas_vnr_type"].fillna('None', inplace = True)
+    df['mas_vnr_type'] = df['mas_vnr_type'].map({'BrkCmn':'BrkCmn',
+                                               'BrkFace':'BrkFace',
+                                               'CBlock':'None',
+                                               'None':'None',
+                                               'Stone':'Stone'
+                                              })    
+    df['mas_vnr_type'] = df['mas_vnr_type'].astype(str)
+    
+    # Convert year_sold to str to be used as categorial value
+    df['year_sold'] = df['year_sold'].astype(str)
     
    
     return df
