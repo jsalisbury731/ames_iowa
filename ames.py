@@ -23,6 +23,7 @@ def rename(df):
                                      'Exter Qual':'exter_qual',
                                      'Exter Cond':'exter_cond',
                                      'Foundation':'foundation',
+                                     'Bsmt Qual':'bsmt_qual',
                                      'Bsmt Cond':'bsmt_cond',
                                      'Bsmt Exposure':'bsmt_expo',
                                      'BsmtFin Type 1':'bsmt_fin_1',
@@ -33,17 +34,27 @@ def rename(df):
                                      'Heating':'heat',
                                      'Central Air':'cent_air',
                                      'Gr Liv Area':'gr_liv_area',
+                                     'Bsmt Full Bath':'bsmt_full_bath',
+                                     'Bsmt Half Bath':'bsmt_half_bath',
                                      'Full Bath':'full_bath',
                                      'Half Bath':'half_bath',
                                      'Bedroom AbvGr':'bedrooms_gr',
                                      'Kitchen AbvGr':'kitchen',
                                      'Kitchen Qual':'kitch_qual',
                                      'TotRms AbvGrd':'tot_rooms_gr',
+                                     'Functional':'functional',
                                      'Fireplaces':'fireplaces',
                                      'Garage Type':'garage_type',
                                      'Garage Cars':'garage_car_size',
                                      'Garage Cond':'garage_cond',
                                      'Paved Drive':'paved_drive',
+                                     
+                                     'Wood Deck SF':'porch_1', 
+                                     'Open Porch SF':'porch_2',
+                                     'Enclosed Porch':'porch_3', 
+                                     '3Ssn Porch':'porch_4', 
+                                     'Screen Porch':'porch_5',
+                                                                         
                                      'Pool QC':'pool_qual',
                                      'Misc Val':'misc_val',
                                      'Yr Sold':'year_sold',
@@ -71,6 +82,7 @@ def rename(df):
                      'exter_qual',      # NEW feature as of 10/2/20
                      'exter_cond',
                      'foundation',      # Secondary variable to investigate
+                     'bsmt_qual',
                      'bsmt_cond',       # Secondary, removing from first model, 1834 (Typicals) / 92 (Good | Excellent) / 70 (Fair | Poor)
                      'bsmt_expo',
                      'bsmt_fin_1',      # Secondary variable to investigate
@@ -81,17 +93,27 @@ def rename(df):
                      'heat',            # Secondary, removing from first model, value split of 2018 (GasA) / 33 (other values)
                      'cent_air',        # Secondary variable to investigate
                      'gr_liv_area',
+                     'bsmt_full_bath',
+                     'bsmt_half_bath',
                      'full_bath',
                      'half_bath',
                      'bedrooms_gr',
                      'kitchen',         # Secondary variable to investigate
                      'kitch_qual',
                      'tot_rooms_gr',    # NEW feature as of 10/2/20
+                     'functional',
                      'fireplaces',      # Secondary variable to investigate
                      'garage_type',
                      'garage_car_size',
                      'garage_cond',     # NEW feature as of 10/2/20
                      'paved_drive',     # Secondary, removing from first model, 1861 (Paved) / 39 (Partial) / 151 (Dirt/Gravel)
+                     
+                     'porch_1',
+                     'porch_2',
+                     'porch_3',
+                     'porch_4',
+                     'porch_5',
+                     
                      'pool_qual',       # Consider removing from first model, only 9 houses with pools
                      'misc_val',        # NEW feature as of 10/2/20
                      'year_sold',
@@ -363,11 +385,34 @@ def map(df):
                                                'CBlock':'None',
                                                'None':'None',
                                                'Stone':'Stone'
-                                              })    
-    df['mas_vnr_type'] = df['mas_vnr_type'].astype(str)
+                                              })
     
     # Convert year_sold to str to be used as categorial value
     df['year_sold'] = df['year_sold'].astype(str)
     
-   
+    # Fill nulls and map bsmt_qual
+    df["bsmt_qual"].fillna('None', inplace = True)
+    df['bsmt_qual'] = df['bsmt_qual'].map({'Ex':'Ex',
+                                           'Gd':'Gd',
+                                           'TA':'TA',
+                                           'Fa':'Fa',
+                                           'Po':'Fa',
+                                           'None':'None'
+                                          })
+    
+    # Fill nulls bsmt_full_bath, bsmt_half_bath
+    df["bsmt_full_bath"].fillna(0, inplace = True)
+    df["bsmt_half_bath"].fillna(0, inplace = True)
+
+    # Map functional to group lesser values
+    df['functional'] = df['functional'].map({'Typ':'Typ',
+                                       'Min1':'Min1',
+                                       'Min2':'Min2',
+                                       'Mod':'Mod',
+                                       'Maj1':'Maj1',
+                                       'Maj2':'Maj2',
+                                       'Sev':'Maj2',
+                                       'Sal':'Maj2'
+                                      })
+
     return df
