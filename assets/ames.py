@@ -48,13 +48,11 @@ def rename(df):
                                      'Garage Cars':'garage_car_size',
                                      'Garage Cond':'garage_cond',
                                      'Paved Drive':'paved_drive',
-                                     
                                      'Wood Deck SF':'porch_1', 
                                      'Open Porch SF':'porch_2',
                                      'Enclosed Porch':'porch_3', 
                                      '3Ssn Porch':'porch_4', 
-                                     'Screen Porch':'porch_5',
-                                                                         
+                                     'Screen Porch':'porch_5',                                   
                                      'Pool QC':'pool_qual',
                                      'Misc Val':'misc_val',
                                      'Yr Sold':'year_sold',
@@ -107,13 +105,11 @@ def rename(df):
                      'garage_car_size',
                      'garage_cond',     # NEW feature as of 10/2/20
                      'paved_drive',     # Secondary, removing from first model, 1861 (Paved) / 39 (Partial) / 151 (Dirt/Gravel)
-                     
                      'porch_1',
                      'porch_2',
                      'porch_3',
                      'porch_4',
                      'porch_5',
-                     
                      'pool_qual',       # Consider removing from first model, only 9 houses with pools
                      'misc_val',        # NEW feature as of 10/2/20
                      'year_sold',
@@ -158,6 +154,7 @@ def map(df):
         cond_tst_2d = df['cond_1'][num] != 'RRAe'
         gets_replaced = df['cond_1'][num]
         does_replacing = df['cond_2'][num]
+        
         if cond_tst_1a or cond_tst_1b:
             df.replace(gets_replaced, does_replacing, inplace=True)
         elif (cond_tst_2a or cond_tst_2b) and (cond_tst_2c or cond_tst_2d):
@@ -414,5 +411,20 @@ def map(df):
                                        'Sev':'Maj2',
                                        'Sal':'Maj2'
                                       })
+    
+    # Map functional categories to values
+    df['functional_mapped'] = df['functional'].map({'Typ':'6',
+                                       'Min1':'5',
+                                       'Min2':'4',
+                                       'Mod':'3',
+                                       'Maj1':'2',
+                                       'Maj2':'1'
+                                      })
+    
+    # Create bsmt_baths column to generalize basement bathroom values
+    df['bsmt_baths'] = df['bsmt_full_bath'] + (df['bsmt_half_bath']/2)
 
+    # Create porch_sf column which includes square footage from any type of porch
+    df['porch_sf'] = df['porch_1'] + df['porch_2'] + df['porch_3'] + df['porch_4'] + df['porch_5']
+    
     return df
