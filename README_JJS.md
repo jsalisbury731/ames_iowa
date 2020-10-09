@@ -164,7 +164,7 @@ As part of my conclusion and post-model visualizations, I needed to pickle my LR
 
 This chart was very helpful in visualizing the coefficients for my various features. It was no surprise that the most influential feature was the living area above grade. This is what typically represents the square footage of a house since unless a basement has a [legal ingress or egress](https://www.homelight.com/blog/buyer-are-basements-included-in-square-footage/#:~:text=Legal%20ingress%20or%20egress), its square footage is usually not calculated in the total SF of the house. Other factors which had a significant negative influence on the sale price of a house were being zoned in either a Commercial, Agricultural, or Industrial zone (all mapped to ms_zoning_other), and a functional rating of Salvage, Severely Damaged, and Major Deductions 2 (all mapped to functional_Maj2). Other functional ratings in the top 10 features all had a positive influence on sale price.
 
-The next thing I wanted to take a look at for my conclusion was the distribution of two groups of homes plotted by their Above Grade Living Area and their Sale Price. The two groups I plotted were 'Home built before 1960 that were remodeled between 2000 and 2010' and 'HOmes built or last remodeled before 1960'.
+The next thing I wanted to take a look at for my conclusion was the distribution of two groups of homes plotted by their Above Grade Living Area and their Sale Price. The two groups I plotted were 'Home built before 1960 that were remodeled between 2000 and 2010' and 'Homes built or last remodeled before 1960'.
 
 <div align="center"><img src="./assets/images/remodeled_or_not.png" width="75%" height="75%"></div>
 
