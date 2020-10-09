@@ -3,6 +3,7 @@ import numpy as np
 
 def rename(df):
     df_rename = df.rename(columns = {'Id':'Id',
+                                     'MS Zoning':'ms_zoning',
                                      'Lot Area':'lot_area',
                                      'Street':'street',
                                      'Land Contour':'land_cont',
@@ -45,21 +46,20 @@ def rename(df):
                                      'Functional':'functional',
                                      'Fireplaces':'fireplaces',
                                      'Garage Type':'garage_type',
+                                     'Garage Finish':'garage_finish',
                                      'Garage Cars':'garage_car_size',
+                                     'Garage Qual':'garage_qual',
                                      'Garage Cond':'garage_cond',
                                      'Paved Drive':'paved_drive',
-                                     'Wood Deck SF':'porch_1', 
-                                     'Open Porch SF':'porch_2',
-                                     'Enclosed Porch':'porch_3', 
-                                     '3Ssn Porch':'porch_4', 
-                                     'Screen Porch':'porch_5',                                   
                                      'Pool QC':'pool_qual',
                                      'Misc Val':'misc_val',
                                      'Yr Sold':'year_sold',
                                      'MS SubClass':'ms_subclass',
-                                     'Lot Shape':'lot_shape'
+                                     'Lot Shape':'lot_shape',
+                                     'Wood Deck SF':'wood_deck_sf'
                                      })
     included_cols = ['Id',
+                     'ms_zoning',
                      'lot_area',
                      'street',          # Secondary, removing from first model, value split of 2044 / 7
                      'land_cont',       # Value split of 1843 / 85 / 80 / 43
@@ -102,19 +102,17 @@ def rename(df):
                      'functional',
                      'fireplaces',      # Secondary variable to investigate
                      'garage_type',
+                     'garage_finish',
                      'garage_car_size',
+                     'garage_qual',
                      'garage_cond',     # NEW feature as of 10/2/20
                      'paved_drive',     # Secondary, removing from first model, 1861 (Paved) / 39 (Partial) / 151 (Dirt/Gravel)
-                     'porch_1',
-                     'porch_2',
-                     'porch_3',
-                     'porch_4',
-                     'porch_5',
                      'pool_qual',       # Consider removing from first model, only 9 houses with pools
                      'misc_val',        # NEW feature as of 10/2/20
                      'year_sold',
                      'ms_subclass',
-                     'lot_shape'
+                     'lot_shape',
+                     'wood_deck_sf'
                      ]
 
     if 'SalePrice' not in df.columns:
@@ -423,8 +421,24 @@ def map(df):
     
     # Create bsmt_baths column to generalize basement bathroom values
     df['bsmt_baths'] = df['bsmt_full_bath'] + (df['bsmt_half_bath']/2)
-
-    # Create porch_sf column which includes square footage from any type of porch
-    df['porch_sf'] = df['porch_1'] + df['porch_2'] + df['porch_3'] + df['porch_4'] + df['porch_5']
+    
+    # Mapping garage_qual to combine like categories
+    df['garage_qual'] = df['garage_qual'].map({'TA':'TA',
+                                             'Gd':'Gd',
+                                             'Fa':'Fa',
+                                             'Ex':'Gd',
+                                             'Po':'Fa',
+                                            })
+    
+    # Mapping ms_zoning to combine like categories
+    df['ms_zoning'] = df['ms_zoning'].map({'A (agr)':'Other',
+                                             'C (all)':'Other',
+                                             'FV':'FV',
+                                             'I (all)':'Other',
+                                             'RH':'RH',
+                                           'RL':'RL',
+                                           'RP':'RP',
+                                           'RM':'RM'
+                                            })
     
     return df
