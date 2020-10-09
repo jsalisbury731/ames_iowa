@@ -120,16 +120,16 @@ After importing my cleaned and engineered data, I first created and plotted my b
 
 I then proceeded to select my features out of all the categories I cleaned/mapped and feature engineered. By use of another function, feat_sel(), I was able to streamline the feature selection process so I could easily comment features in/out and just rerun my entire notebook to test the new model.
 
-I trained/test/split my data, instantiated and fit the model, calculated the coefficients, and calculated my predictions and residuals. I then calculated the MSE and RMSE for both the training and validation data as well as calculating the r-squared scores.
+I trained/test/split my data, instantiated and fit the model, calculated the coefficients, and calculated my predictions and residuals. I then calculated the MSE and RMSE for both the training and validation data as well as calculating the R-squared scores.
 
 |Metric|Split|Score|
 |---|---|---|
 |MSE|Training|0.010568052522169484|
 |RMSE|Training|0.10280103366294273|
-|r2|Training|0.9375076375371625|
+|R2|Training|0.9375076375371625|
 |MSE|Validation|0.016373309956852496|
 |RMSE|Validation|0.1279582352052907|
-|r2|Validation|0.903518251292407|
+|R2|Validation|0.903518251292407|
 
 In order to better visualize the data and check for and major issues, I plotted my residuals looking for an even distribution of positive and negative residuals and to ensure there wasn't spread. My residuals had several values that were further on the negative side, but I found removing such data points from my original training data skewed my model's results and hurt the model performance. 
 
@@ -146,7 +146,7 @@ I then wanted to check how my model performed compared to my null hypothesis. To
 |RMSE|Baseline/Null|79276.56098763691|
 |RMSE|Linear Regression|19263.461294487737|
 
-This was a very noticeable improvement over my baseline model. At one point I had concerns of overfitting my LR model because I kept adding features and the RMSE and r2 scores kept improving ever so slightly, although my final RMSE on the test data got worse. I ultimately tried to balance my features and model to find the sweet spot in fit.
+This was a very noticeable improvement over my baseline model. At one point I had concerns of overfitting my LR model because I kept adding features and the RMSE and R2 scores kept improving ever so slightly, although my final RMSE on the test data got worse. I ultimately tried to balance my features and model to find the sweet spot in fit.
 
 One last thing to consider for the validity of my Linear Regression model is that it meets the LINEM requirements. I would say my model passes Linearity as can be seen in my baseline model. The data collected was independent of each other, as best I can tell and is to be assumed, as no house sale affected another house sale directly. The distribution of errors was relatively normal with some minor skewing to the left. There was also equal variance of errors except for a few outliers spread in the negative direction. And lastly, I didn't find any multicollinear features resulting in correlation higher than 0.95.
 
