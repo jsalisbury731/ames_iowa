@@ -80,7 +80,7 @@ ___
 |**sale_price**|*int*|Ames, Iowa Housing Dataset|Sale price of the homes in the training dataset|
 
 ___
-### [Data Discovery](https://git.generalassemb.ly/jsalisbury731/project_2/blob/master/code/01_EDA.ipynb)
+### [Data Discovery](https://github.com/jsalisbury731/ames_iowa/blob/master/code/01_EDA.ipynb)
 
 - My initial dive into the data began by reading through the data documentation and considering which features I thought might have the greatest influence, positive or negative, on sale price.
 - Next, I created a list of the categorical variables I was investigating and counted their values to determine what changes I would have to make to the data during the cleaning and mapping process.
@@ -96,7 +96,7 @@ ___
 - One thing to mention about this project was that it was highly iterative. The steps I took above, especially evaluating value counts for categorical (and sometimes numeric) columns were repeated on new features throughout the refinement process.
 
 ___
-### [Cleaning and Mapping](https://git.generalassemb.ly/jsalisbury731/project_2/blob/master/code/02_Cleaning.ipynb)
+### [Cleaning and Mapping](https://github.com/jsalisbury731/ames_iowa/blob/master/code/02_Cleaning.ipynb)
 
 After evaluating the various categorical data that needed to be mapped or grouped in my EDA, I began the task of renaming my columns, selecting the columns I would be working with, and cleaning and mapping all my features. I ultimately ended up creating two functions to reproduce these tasks in quick succession which would allow me to iterate over various feature options. I then saved these functions in a file named [ames.py](https://git.generalassemb.ly/jsalisbury731/project_2/blob/master/assets/ames.py).
 
@@ -105,14 +105,14 @@ The first function, rename(), renamed all the columns and then trimmed the dataf
 The remaining cleaning I performed was just to drop certain outliers which were distorting my model. Considering I ran a couple of tests on the model with various outliers dropped, I did this work in the actual notebook since I wasn't certain which changes would be permanenet.
 
 ___
-### [Feature Engineering](https://git.generalassemb.ly/jsalisbury731/project_2/blob/master/code/03_Feature_Engineering.ipynb)
+### [Feature Engineering](https://github.com/jsalisbury731/ames_iowa/blob/master/code/03_Feature_Engineering.ipynb)
 
 For my feature engineering I knew I was looking to work with interaction terms and also take the log of certain features. In order to do that effectively, especially taking the log, I first had to scale my data so there were no zero values included. I used the MinMax Scaler instead of the StandardScaler since the StandardScaler should only be used on normally distributed data. Because I knew some of my data was not normally distributed, I used the MinMax Scaler and scaled values to (1, 2). I also tested certain linear shifts to shift the data away from zero. Lastly, I took the log of certain widely spread data with big variations in values.
 
 I listed all of the features I engineered that were successful in contributing to my model in the data dictionary with notation about how I engineered the feature. Some of these had a greater effect on the resulting model than others, but I found them all to assit in my model's performance in at least a small amount.
 
 ___
-### [Modeling and Tuning](https://git.generalassemb.ly/jsalisbury731/project_2/blob/master/code/04_Model_Benchmarks_Tuning.ipynb)
+### [Modeling and Tuning](https://github.com/jsalisbury731/ames_iowa/blob/master/code/04_Model_Benchmarks_Tuning.ipynb)
 
 After importing my cleaned and engineered data, I first created and plotted my baseline model. In addition to plotting my null hypothesis (the mean sale price) on the vivsualization, I plotted the OLS regression line to get an idea of what that looked like and for consideration.
 
@@ -151,12 +151,12 @@ This was a very noticeable improvement over my baseline model. At one point I ha
 One last thing to consider for the validity of my Linear Regression model is that it meets the LINEM requirements. I would say my model passes Linearity as can be seen in my baseline model. The data collected was independent of each other, as best I can tell and is to be assumed, as no house sale affected another house sale directly. The distribution of errors was relatively normal with some minor skewing to the left. There was also equal variance of errors except for a few outliers spread in the negative direction. And lastly, I didn't find any multicollinear features resulting in correlation higher than 0.95.
 
 ___
-### [Regularization](https://git.generalassemb.ly/jsalisbury731/project_2/blob/master/code/05_Regularization.ipynb)
+### [Regularization](https://github.com/jsalisbury731/ames_iowa/blob/master/code/05_Regularization.ipynb)
 
 In addition to my Linear Regression model, I tested a RidgeCV and LassoCV model to compare to my results to. Ultimately, I didn't migrate these models into my production model I only used numeric columns to fit the model and found without several of the high performing categorical features my model's RSME performed worse.
 
 ___
-### [Conclusions and Recommendations](https://git.generalassemb.ly/jsalisbury731/project_2/blob/master/code/06_Post-model_Viz.ipynb)
+### [Conclusions and Recommendations](https://github.com/jsalisbury731/ames_iowa/blob/master/code/06_Post-model_Viz.ipynb)
 
 As part of my conclusion and post-model visualizations, I needed to pickle my LR model from my modeling notebook. After loading my pickle and any other necessary dataframes I visualized the coefficient weights for the top 10 most influential features.
 
